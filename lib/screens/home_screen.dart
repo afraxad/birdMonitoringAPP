@@ -11,7 +11,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  String _displayText = '';
+  String _birdCount = '';
+  String _timeStamp = '';
   final _database = FirebaseDatabase.instance.ref();
   late StreamSubscription _systemMonitoringStream;
 
@@ -24,11 +25,19 @@ class HomeScreenState extends State<HomeScreen> {
   void _activateListeners(){
     _systemMonitoringStream =
         _database.child("systemMonitoring/birdCount").onValue.listen((event) {
-      final Object? birdCount = event.snapshot.value;
-      setState(() {
-        _displayText = '$birdCount';
-      });
-    });
+          final Object? birdCount = event.snapshot.value;
+          setState(() {
+            _birdCount = '$birdCount';
+          });
+        });
+
+    _systemMonitoringStream =
+        _database.child("systemMonitoring/timeStamp").onValue.listen((event) {
+          final Object? timeStamp = event.snapshot.value;
+          setState(() {
+            _timeStamp = '$timeStamp';
+          });
+        });
   }
 
   @override
@@ -214,7 +223,7 @@ class HomeScreenState extends State<HomeScreen> {
                                     color: Colors.teal,
                                     shape: BoxShape.circle,
                                 ),
-                                child: Text(_displayText,
+                                child: Text(_birdCount,
                                     style: GoogleFonts.montserrat(
                                         fontSize: 60,
                                         fontStyle: FontStyle.normal,
@@ -224,7 +233,7 @@ class HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               const Gap(10),
-                              Text(" As of _time",
+                              Text(" As of $_timeStamp",
                                   style: GoogleFonts.montserrat(
                                       fontSize: 18,
                                       fontStyle: FontStyle.italic,
