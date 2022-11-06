@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "53803409127",
+    "firebase_url": "https://bird-monitoring-app-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "bird-monitoring-app",
+    "storage_bucket": "bird-monitoring-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53803409127:android:6cdae48de3e94101c18c42",
+        "android_client_info": {
+          "package_name": "com.example.bird_monitoring_and_detection"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53803409127-36u0emj3vdpkhinja29475rflh4756uf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk3AMCnrEUWgk2pp6fpSCMyrEvuGGX3o4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53803409127-36u0emj3vdpkhinja29475rflh4756uf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "53803409127-c652gifoat4f5vsvgj0vbp4q13ehm3fn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.birdapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
