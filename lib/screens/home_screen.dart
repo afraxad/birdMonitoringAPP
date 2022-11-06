@@ -1,16 +1,35 @@
+import 'dart:async';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
   @override
   HomeScreenState createState() => HomeScreenState();
 }
 
 class HomeScreenState extends State<HomeScreen> {
+  String _displayText = '';
+  final _database = FirebaseDatabase.instance.ref();
+  late StreamSubscription _systemMonitoringStream;
+
+  @override
+  void initState(){
+    super.initState();
+    _activateListeners();
+  }
+
+  void _activateListeners(){
+    _systemMonitoringStream =
+        _database.child("systemMonitoring/birdCount").onValue.listen((event) {
+      final Object? birdCount = event.snapshot.value;
+      setState(() {
+        _displayText = '$birdCount';
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -195,7 +214,7 @@ class HomeScreenState extends State<HomeScreen> {
                                     color: Colors.teal,
                                     shape: BoxShape.circle,
                                 ),
-                                child: Text(" 12 ",
+                                child: Text(_displayText,
                                     style: GoogleFonts.montserrat(
                                         fontSize: 60,
                                         fontStyle: FontStyle.normal,
@@ -222,5 +241,11 @@ class HomeScreenState extends State<HomeScreen> {
             ]
         )
     );
+  }
+
+  @override
+  void deactivate() {
+    _systemMonitoringStream.cancel();
+    super.deactivate();
   }
 }
